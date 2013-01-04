@@ -1,0 +1,255 @@
+@import "dtbook.2005.basic.css";
+
+/* ------------------------------------------------------------- */
+/*             elements without display properties               */
+/* ------------------------------------------------------------- */
+
+book {
+ font-family: "times new roman", times, serif; }
+
+/* ------------------------------------------------------------- */
+/*             frontmatter, bodymatter, rearmatter               */
+/* ------------------------------------------------------------- */
+
+frontmatter:before, bodymatter:before, rearmatter:before {
+  display: block;
+  text-align: center;
+  color: white;
+  background-color: rgb(127,255,127);
+  font-weight: bold;
+  font-size: 1.5em; }
+
+frontmatter:before {
+  content: "FRONTMATTER"; }
+
+bodymatter:before {
+  content: "BODYMATTER"; }
+
+rearmatter:before {
+  content: "REARMATTER"; }
+
+frontmatter, bodymatter, rearmatter {
+  margin: 0; }
+
+/* ------------------------------------------------------------- */
+/*                          headings                             */
+/* ------------------------------------------------------------- */
+
+bridgehead, hd {
+  margin-top: 0.25em; }
+
+h1, level hd {
+  margin-top: 0.5em; }
+
+h2, level level hd {
+  margin-top: 0.4em;
+  color: green; }
+
+h3, level level level hd {
+  margin-top: 0.25em;
+  color: blue; }
+
+h4, level level level level hd {
+  margin-top: 0.25em;
+  color: maroon; }
+
+h5, level level level level level hd {
+  margin-top: 0.25em;
+  color: purple; }
+
+h6, level level level level level level hd {
+  margin-top: 0.25em;
+  color: navy; }
+
+/* ------------------------------------------------------------- */
+/*                          pagenum                              */
+/* ------------------------------------------------------------- */
+
+pagenum {
+  display: block;
+  text-align: center; }
+
+/* ------------------------------------------------------------- */
+/*                       general block                           */
+/* ------------------------------------------------------------- */
+
+div:before {
+    content: "DIV." attr(class);
+    font-size: smaller; }
+
+div {
+  border: 1px dotted black; }
+
+level:before {
+  display: inline;
+  content: "level depth: " attr(depth) " class: " attr(class) " ";
+  border: 1px solid black;
+  margin-top: 1em;
+  font-size: 0.8em;
+  padding: 0.2em; }
+
+level, level1, level2, level3, level4, level5, level6 {
+  margin-top: 1em;
+  display: block; }
+
+prodnote:before {
+    content: "PRODNOTE:";
+    font-size: smaller; }
+
+notice:before {
+    content: "NOTICE:";
+    font-size: smaller; }
+
+prodnote, notice {
+  background-color: rgb(239,239,239); }
+
+sidebar:before {
+    content: "SIDEBAR [" attr(render) "]\A";
+    font-size: smaller; }
+
+note:before {
+    content: "NOTE\A";
+    font-size: smaller; }
+
+blockquote:before {
+    content: "BLOCKQUOTE\A";
+    font-size: smaller; }
+
+/* ------------------------------------------------------------- */
+/*                      general inlines                          */
+/* ------------------------------------------------------------- */
+
+span.roman {
+  background-color: orange; }
+
+span.note_identifier {
+  color: blue; }
+
+span:lang(xx) {
+  background-color: red; }
+
+span:lang(en), span:lang(de), span:lang(fr) {
+  background-color: rgb(255,127,127); }
+
+span:lang(sv), span:lang(no), span:lang(fi) {
+  background-color: rgb(255,191,191); }
+
+sub, sup {
+  font-size: 75%; }
+
+abbr, acronym {
+  background-color: yellow; }
+
+br {
+ content: ""; }
+
+annoref:before {
+   link: attr(idref);
+   content: "ANNOREF:"; }
+
+noteref:before {
+   link: attr(idref);
+   content: "NOTEREF:"; }
+
+/* ------------------------------------------------------------- */
+/*                      list.ul,list.ol                          */
+/* ------------------------------------------------------------- */
+
+li {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em; }
+
+list[type='ol'] {
+  list-style-type: decimal; }
+
+list[bullet='none'] {
+  list-style-type: none; }
+
+/* ------------------------------------------------------------- */
+/*                          tables                               */
+/* ------------------------------------------------------------- */
+
+col {
+  display: none; }
+
+colgroup {
+  display: none; }
+
+th {
+  background-color: rgb(239,239,239); }
+
+/* ------------------------------------------------------------- */
+/*                          images                               */
+/* ------------------------------------------------------------- */
+
+imggroup:before {
+ display: block;
+ background-color: rgb(239, 239, 127);
+ content: "imggroup";
+ font-weight: bold;
+ color: white;
+ border-top: 1px solid black;
+ border-left: 1px solid black;
+ border-right: 1px solid black;
+ text-align: center; }
+
+imggroup {
+ display: block;
+ background-color: rgb(239, 239, 127);
+ padding: 1em 1em 1em 1em;
+ border: 1px solid black; }
+
+imggroup > caption {
+ display: block;
+ font-weight: bold;
+ padding-top: 0.5em;
+ padding-bottom: 0.5em;
+ background-color: white;
+ text-align: center; }
+
+img {
+  content: attr(src, url);
+  text-align: center; }
+
+/* ------------------------------------------------------------- */
+/*                      cru's  tilføjelser                       */
+/* ------------------------------------------------------------- */
+
+p.precedingemptyline:before{
+  content:"PRECEDINGEMPTYLINE\A";
+  color:navy;
+  font-size:smaller; }
+
+p.precedingemptyline{
+  background-color: #cdc0b0;
+  padding-top: 1em; }
+	
+p.precedingseparator:before{
+  content:"PRECEDINGSEPARATOR\A";
+  color:silver;
+  font-size:smaller; }
+
+p.precedingseparator{
+  padding-top: 1em;	
+  background-color:#FFFF99;
+  border-top: 1px solid black; }
+
+poem:before{
+  font-size: smaller;
+  content:"POEM\A"; }
+
+poem, div.poem {
+  padding:10px;
+  background-color:#CCFFFF;
+  border: 1px dotted gray; }
+
+div.stanza {
+  background-color:#CC0033;
+  color:white;
+  border: 1px dotted gray; }
+
+p.bridgehead {
+  padding-top:6px;
+  color : gray;
+  font-size:large; }
+

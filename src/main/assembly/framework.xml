@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<assembly>
+  <id>framework</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <baseDirectory>.</baseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>target/framework</directory>
+      <outputDirectory>/dtbook</outputDirectory>
+    </fileSet>
+  </fileSets>
+</assembly>
