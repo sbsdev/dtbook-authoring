@@ -1,4 +1,4 @@
-package nota.oxygen.common.dtbook;
+package ch.sbs.preptools.oxygen;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -29,7 +29,7 @@
 								<cssFile-array>
 									<cssFile>
 										<field name="href">
-											<String>${frameworks}/dtbook/css/dtbook-nota.css</String>
+											<String>${frameworks}/dtbook/css/dtbook.2005.sbs.css</String>
 										</field>
 										<field name="title">
 											<String>DTBook</String>
@@ -203,7 +203,7 @@
 														<map/>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.FindURLsOperation</String>
+														<String>ch.sbs.preptools.oxygen.FindURLsOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
