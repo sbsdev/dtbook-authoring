@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0"
+         xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+         xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+         xmlns:brl="http://www.daisy.org/z3986/2009/braille/"
+         datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+    <!-- Schematron title and namespaces -->
+    <sch:title>DTBook 2005-3 Schematron tests for SBS</sch:title>
+    
+    <sch:ns prefix="dtb" uri="http://www.daisy.org/z3986/2005/dtbook/"/>
+    <sch:ns prefix="brl" uri="http://www.daisy.org/z3986/2009/braille/"/>
+    
+    <!-- ===================== -->
+    <!-- Vanilla DTBook 2005-3 -->
+    <!-- ===================== -->
+    
+    <include href="dtbook-2005-3.rng" ns="http://www.daisy.org/z3986/2005/dtbook/">
+        
+        <!-- ======================== -->
+        <!-- @xml:lang and @brl:grade -->
+        <!-- ======================== -->
+        
+        <!-- Limit possible values of @xml:lang -->
+        <define name="dtb.LanguageCode">
+            <choice>
+                <value>de</value>
+                <value>de-1901</value>
+                <value>de-CH</value>
+                <value>de-CH-1901</value>
+                <value>gsw</value>
+                <value>en</value>
+                <value>fr</value>
+                <value>it</value>
+                <value>es</value>
+                <value>und</value>
+            </choice>
+        </define>
+        
+        <!-- Don't allow an element with @xml:lang|@brl:grade to have descendants with @xml:lang or @brl:grade, unless the element is <dtbook> -->
+        <sch:pattern name="sbs_lang_grade" id="sbs_lang_grade">
+            <sch:rule context="*[not(self::dtb:dtbook)][@xml:lang or @brl:grade]">
+                <sch:assert test="not(descendant::*[@xml:lang or @brl:grade])">
+                    An element with xml:lang or brl:grade can not have descendants with xml:lang or brl:grade.
+                </sch:assert>
+            </sch:rule>
+        </sch:pattern>
+        
+        <!-- ======== -->
+        <!-- dtb:meta -->
+        <!-- ======== -->
+        
+        <!-- Limit possible values of @name -->
+        <define name="dtb.attlist.meta" combine="interleave">
+            <ref name="dtb.i18n"/>
+            <optional>
+                <attribute name="http-equiv">
+                    <data type="NMTOKEN"/>
+                </attribute>
+            </optional>
+            <optional>
+                <attribute name="name">
+                    <choice>
+                        <value>dtb:uid</value>
+                        <value>dc:Title</value>
+                        <value>dc:Creator</value>
+                        <value>dc:Subject</value>
+                        <value>dc:Description</value>
+                        <value>dc:Publisher</value>
+                        <value>dc:Date</value>
+                        <value>dc:Type</value>
+                        <value>dc:Format</value>
+                        <value>dc:Identifier</value>
+                        <value>dc:Source</value>
+                        <value>dc:Language</value>
+                        <value>dc:Rights</value>
+                        <value>dtb:sourceEdition</value>
+                        <value>dtb:sourcePublisher</value>
+                        <value>dtb:sourceRights</value>
+                        <value>dtb:sourceDate</value>
+                        <value>prod:series</value>
+                        <value>prod:seriesNumber</value>
+                        <value>prod:source</value>
+                    </choice>
+                </attribute>
+            </optional>
+            <attribute name="content"/>
+            <optional>
+                <attribute name="scheme"/>
+            </optional>
+        </define>
+    </include>
+
+    <!-- ========================= -->
+    <!-- Braille contraction hints -->
+    <!-- ========================= -->
+
+    <include href="dtbook-2005-3-sbs-contractionhint.rng" ns="http://www.daisy.org/z3986/2009/braille/"/>
+    
+    <define name="dtb.externalinline" combine="choice" ns="http://www.daisy.org/z3986/2005/dtbook/">
+        <choice>
+            <ref name="brl.contractionhint" ns="http://www.daisy.org/z3986/2009/braille/"/>
+        </choice>
+    </define>
+
+    <!-- ================= -->
+    <!-- @brl:continuation -->
+    <!-- ================= -->
+    
+    <!-- @id must be unique -->
+    <sch:pattern name="sbs_id" id="sbs_id">
+        <sch:rule context="*[@id]">
+            <sch:assert test="some $id in @id satisfies count(//*[@id eq $id]) = 1">
+                id attributes must be unique.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    
+    <!-- http://www.daisy.org/z3998/2012/auth/cm/#z3998.continuation.attrib -->
+    <!-- http://www.daisy.org/z3998/2012/schema/mod/z3998-linking.rng -->
+    <sch:pattern name="z3998_continuation" id="z3998_continuation">
+        <sch:rule context="*[@brl:continuation]">
+            <sch:assert test="every $id in tokenize(@brl:continuation, '\s+') satisfies count(index-of(tokenize(@brl:continuation, '\s+'), $id)) = 1">
+                The continuation attribute must not reference the same ID multiple times.
+            </sch:assert>
+            <sch:assert test="every $id in tokenize(@brl:continuation, '\s+') satisfies current() &lt;&lt; //*[@id eq $id]">
+                Elements referenced by a continuation attribute must be located after the referencing element (i.e., in document order).
+            </sch:assert>
+            <sch:assert test="every $id in tokenize(@brl:continuation, '\s+') satisfies name(//*[@id eq $id]) eq name(current())">
+                Elements referenced by a continuation attribute must have the same QName as the referencing element.
+            </sch:assert>
+            <sch:assert test="every $id in tokenize(@brl:continuation, '\s+') satisfies not(current() is //*[@id eq $id])">
+                Elements carrying a continuation attribute must not reference themselves.
+            </sch:assert>
+            <!-- This rule is in the specification but not in z3998-linking.rng -->
+            <sch:assert test="every $id in tokenize(@brl:continuation, '\s+') satisfies not(//*[@id eq $id and @brl:continuation])">
+                Elements that are referenced as continuations must not have a continuation attribute themselves.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    
+    <!-- Additional restrictions for SBS -->
+    <sch:pattern name="sbs_continuation" id="sbs_continuation">
+        <sch:rule context="*[@brl:continuation]">
+            <sch:assert test="some $continuation in @brl:continuation 
+                              satisfies normalize-space(string-join(following::text()[
+                              not(ancestor::*[@id and index-of(tokenize($continuation, '\s+'), @id)]) and 
+                              following::*[@id and index-of(tokenize($continuation, '\s+'), @id)]], '')) eq ''">
+                Elements that are linked together with continuation attributes must form a whole that is not broken down by other non-empty nodes.
+            </sch:assert>
+        </sch:rule>
+    </sch:pattern>
+    
+</grammar>
