@@ -19,6 +19,28 @@
     </dependencies>
     <build>
 	<plugins>
+            <plugin>
+                <groupId>us.bryon</groupId>
+                <artifactId>relaxng-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>trang</goal>
+                        </goals>
+                        <configuration>
+                            <translations>
+                                <translation>
+                                    <in>src/main/schema/dtbook-2005-3-sbs-braille.rnc</in>
+                                    <out>target/framework/schema/dtbook-2005-3-sbs-braille.rng</out>
+                                </translation>
+                            </translations>
+                            <src>empty</src>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 	    <plugin>
 		<groupId>org.jasig.maven</groupId>
 		<artifactId>sass-maven-plugin</artifactId>
