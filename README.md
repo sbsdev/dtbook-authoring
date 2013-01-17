@@ -16,3 +16,8 @@ Developer mode:
 * Bert Frees <bert.frees@sbs.ch>
 
 ## License
+
+Copyright 2013 Swiss Library for the Blind, Visual Impaired and Print Disabled.
+
+Licensed under GNU Lesser General Public License as published by the Free Software Foundation,
+either [version 3](http://www.gnu.org/licenses/gpl-3.0.html) of the License, or (at your option) any later version.
