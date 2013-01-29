@@ -45,27 +45,71 @@
 							</field>
 							<field name="actionDescriptors">
 								<action-array>
+									<!-- DTBOOK MARKUP -->
 									<action>
 										<field name="id">
-											<String>LEVEL_MARKUP_SAME_LEVEL</String>
+											<String>MARKUP_STRONG</String>
 										</field>
 										<field name="name">
-											<String>Markup as same-level heading</String>
+											<String>Markup as strong</String>
 										</field>
 										<field name="description">
-											<String>Splits the current level at the current element, making the current element heading of the new level</String>
+											<String>Markup current selection as strong.</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook/images/h.png</String>
+											<String>${frameworks}/dtbook/images/strong.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook/images/h.png</String>
+											<String>${frameworks}/dtbook/images/strong.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<String>shift ctrl 1</String>
+											<String>ctrl B</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>not(ancestor-or-self::strong)</String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;strong xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/strong></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_EM</String>
+										</field>
+										<field name="name">
+											<String>Markup as emphasized</String>
+										</field>
+										<field name="description">
+											<String>Markup current selection as emphasized.</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook/images/em.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook/images/em.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>ctrl I</String>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -76,33 +120,17 @@
 													<field name="argValues">
 														<map>
 															<entry>
-																<String>fixed-heading-tags</String>
-																<String>h1|h2|h3|h4|h5|h6</String>
+																<String>fragment</String>
+																<String>&lt;em xmlns="http://www.daisy.org/z3986/2005/dtbook/">&lt;/em></String>
 															</entry>
 															<entry>
-																<String>fixed-level-tags</String>
-																<String>level1|level2|level3|level4|level5|level6</String>
-															</entry>
-															<entry>
-																<String>generic-heading-tag</String>
-																<String>hd</String>
-															</entry>
-															<entry>
-																<String>generic-level-tag</String>
-																<String>level</String>
-															</entry>
-															<entry>
-																<String>level-type</String>
-																<String>same-level</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.daisy.org/z3986/2005/dtbook/</String>
+																<String>schemaAware</String>
+																<String>false</String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
@@ -110,25 +138,216 @@
 									</action>
 									<action>
 										<field name="id">
-											<String>LEVEL_MARKUP_SUB_LEVEL</String>
+											<String>MARKUP_HEADING</String>
 										</field>
 										<field name="name">
-											<String>Markup as sub-level heading</String>
+											<String>Markup as heading</String>
 										</field>
 										<field name="description">
-											<String>Make the current element the heading of a new sub-level of the current level</String>
+											<String>Markup current element as a level heading.</String>
 										</field>
 										<field name="largeIconPath">
-											<String>${frameworks}/dtbook/images/h_plus.png</String>
+											<String>${frameworks}/dtbook/images/heading.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String>${frameworks}/dtbook/images/h_plus.png</String>
+											<String>${frameworks}/dtbook/images/heading.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
 										</field>
 										<field name="accelerator">
-											<String>ctrl shift 2</String>
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>ch.sbs.preptools.oxygen.MarkupHeadingOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_UNORDERED_LIST</String>
+										</field>
+										<field name="name">
+											<String>Markup as unordered list</String>
+										</field>
+										<field name="description">
+											<String>Markup current elements as an unordered list.</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook/images/unordered_list.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook/images/unordered_list.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>ch.sbs.preptools.oxygen.MarkupUnorderedListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_ORDERED_LIST</String>
+										</field>
+										<field name="name">
+											<String>Markup as ordered list</String>
+										</field>
+										<field name="description">
+											<String>Markup current elements as an ordered list.</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook/images/ordered_list.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook/images/ordered_list.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>ch.sbs.preptools.oxygen.MarkupOrderedListOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>INDENT</String>
+										</field>
+										<field name="name">
+											<String>Indent</String>
+										</field>
+										<field name="description">
+											<String>Increase the indentation.</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook/images/indent.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook/images/indent.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>TAB</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*[local-name()=('h1','h2','h3','h4','h5')]</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>ch.sbs.preptools.oxygen.IndentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<action>
+										<field name="id">
+											<String>OUTDENT</String>
+										</field>
+										<field name="name">
+											<String>Outdent</String>
+										</field>
+										<field name="description">
+											<String>Decrease the indentation.</String>
+										</field>
+										<field name="largeIconPath">
+											<String>${frameworks}/dtbook/images/outdent.png</String>
+										</field>
+										<field name="smallIconPath">
+											<String>${frameworks}/dtbook/images/outdent.png</String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<String>shift TAB</String>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String>ancestor-or-self::*[local-name()=('h2','h3','h4','h5','h6')]</String>
+													</field>
+													<field name="argValues">
+														<map/>
+													</field>
+													<field name="operationID">
+														<String>ch.sbs.preptools.oxygen.OutdentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<!-- BRAILLE MARKUP -->
+									<action>
+										<field name="id">
+											<String>MARKUP_BRL_ROMAN</String>
+										</field>
+										<field name="name">
+											<String>Markup as Roman numeral</String>
+										</field>
+										<field name="description">
+											<String>Markup current selection as a Roman number.</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
 										</field>
 										<field name="actionModes">
 											<actionMode-array>
@@ -139,38 +358,62 @@
 													<field name="argValues">
 														<map>
 															<entry>
-																<String>fixed-heading-tags</String>
-																<String>h1|h2|h3|h4|h5|h6</String>
-															</entry>
-															<entry>
-																<String>fixed-level-tags</String>
-																<String>level1|level2|level3|level4|level5|level6</String>
-															</entry>
-															<entry>
-																<String>generic-heading-tag</String>
-																<String>hd</String>
-															</entry>
-															<entry>
-																<String>generic-level-tag</String>
-																<String>level</String>
-															</entry>
-															<entry>
-																<String>level-type</String>
-																<String>sub-level</String>
-															</entry>
-															<entry>
-																<String>namespace</String>
-																<String>http://www.daisy.org/z3986/2005/dtbook/</String>
+																<String>fragment</String>
+																<String>&lt;num xmlns="http://www.daisy.org/z3986/2009/braille/" role="roman">&lt;/num></String>
 															</entry>
 														</map>
 													</field>
 													<field name="operationID">
-														<String>nota.oxygen.common.dtbook.MarkupLevelHeadingOperation</String>
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
 													</field>
 												</actionMode>
 											</actionMode-array>
 										</field>
 									</action>
+									<action>
+										<field name="id">
+											<String>MARKUP_BRL_ISBN</String>
+										</field>
+										<field name="name">
+											<String>Markup as ISBN</String>
+										</field>
+										<field name="description">
+											<String>Markup current selection as a ISBN.</String>
+										</field>
+										<field name="largeIconPath">
+											<String></String>
+										</field>
+										<field name="smallIconPath">
+											<String></String>
+										</field>
+										<field name="accessKey">
+											<String></String>
+										</field>
+										<field name="accelerator">
+											<null/>
+										</field>
+										<field name="actionModes">
+											<actionMode-array>
+												<actionMode>
+													<field name="xpathCondition">
+														<String></String>
+													</field>
+													<field name="argValues">
+														<map>
+															<entry>
+																<String>fragment</String>
+																<String>&lt;num xmlns="http://www.daisy.org/z3986/2009/braille/" role="isbn">&lt;/num></String>
+															</entry>
+														</map>
+													</field>
+													<field name="operationID">
+														<String>ro.sync.ecss.extensions.commons.operations.SurroundWithFragmentOperation</String>
+													</field>
+												</actionMode>
+											</actionMode-array>
+										</field>
+									</action>
+									<!-- PREP TOOLS -->
 									<action>
 										<field name="id">
 											<String>FIND_URLS</String>
@@ -179,13 +422,13 @@
 											<String>Find URLs</String>
 										</field>
 										<field name="description">
-											<String></String>
+											<String>Find and conform possible URL occurrences.</String>
 										</field>
 										<field name="largeIconPath">
-											<String></String>
+											<String>${frameworks}/dtbook/images/link.png</String>
 										</field>
 										<field name="smallIconPath">
-											<String></String>
+											<String>${frameworks}/dtbook/images/link.png</String>
 										</field>
 										<field name="accessKey">
 											<String></String>
@@ -246,7 +489,7 @@
 							<field name="toolbarDescriptor">
 								<toolbar>
 									<field name="id">
-										<String>Toolbar</String>
+										<String>DTBook markup</String>
 									</field>
 									<field name="type">
 										<Integer>2</Integer>
@@ -261,17 +504,37 @@
 										<toolbarEntry-array>
 											<toolbarItem>
 												<field name="actionID">
-													<String>LEVEL_MARKUP_SAME_LEVEL</String>
+													<String>MARKUP_STRONG</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>LEVEL_MARKUP_SUB_LEVEL</String>
+													<String>MARKUP_EM</String>
 												</field>
 											</toolbarItem>
 											<toolbarItem>
 												<field name="actionID">
-													<String>FIND_URLS</String>
+													<String>MARKUP_HEADING</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_UNORDERED_LIST</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>MARKUP_ORDERED_LIST</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>INDENT</String>
+												</field>
+											</toolbarItem>
+											<toolbarItem>
+												<field name="actionID">
+													<String>OUTDENT</String>
 												</field>
 											</toolbarItem>
 										</toolbarEntry-array>
@@ -279,7 +542,77 @@
 								</toolbar>
 							</field>
 							<field name="additionalToolbarsDescriptors">
-								<null/>
+								<toolbar-array>
+									<toolbar>
+										<field name="id">
+											<String>Braille markup</String>
+										</field>
+										<field name="type">
+											<Integer>2</Integer>
+										</field>
+										<field name="largeIconPath">
+											<null/>
+										</field>
+										<field name="smallIconPath">
+											<null/>
+										</field>
+										<field name="toolbarEntriesDescriptorList">
+											<toolbarEntry-array>
+												<toolbar>
+													<field name="id">
+														<String>brl:num</String>
+													</field>
+													<field name="type">
+														<Integer>3</Integer>
+													</field>
+													<field name="largeIconPath">
+														<String></String>
+													</field>
+													<field name="smallIconPath">
+														<String></String>
+													</field>
+													<field name="toolbarEntriesDescriptorList">
+														<toolbarEntry-array>
+															<toolbarItem>
+																<field name="actionID">
+																	<String>MARKUP_BRL_ROMAN</String>
+																</field>
+															</toolbarItem>
+															<toolbarItem>
+																<field name="actionID">
+																	<String>MARKUP_BRL_ISBN</String>
+																</field>
+															</toolbarItem>
+														</toolbarEntry-array>
+													</field>
+												</toolbar>
+											</toolbarEntry-array>
+										</field>
+									</toolbar>
+									<toolbar>
+										<field name="id">
+											<String>Prep tools</String>
+										</field>
+										<field name="type">
+											<Integer>2</Integer>
+										</field>
+										<field name="largeIconPath">
+											<null/>
+										</field>
+										<field name="smallIconPath">
+											<null/>
+										</field>
+										<field name="toolbarEntriesDescriptorList">
+											<toolbarEntry-array>
+												<toolbarItem>
+													<field name="actionID">
+														<String>FIND_URLS</String>
+													</field>
+												</toolbarItem>
+											</toolbarEntry-array>
+										</field>
+									</toolbar>
+								</toolbar-array>
 							</field>
 							<field name="contextualItems">
 								<contextProvider>
