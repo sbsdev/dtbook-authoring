@@ -1,1 +1,188 @@
 @import "dtbook.2005.basic.css";
+
+@namespace brl "http://www.daisy.org/z3986/2009/braille/";
+
+$monospace: "Courier new", monospace;
+$grey-border: 1px solid #AAAAAA;
+$grey-background: #EEEEEE;
+
+
+/* ------------------------------------------------------------- */
+/*                           general                             */
+/* ------------------------------------------------------------- */
+
+/*book {
+ font-family: "Ubuntu", sans-serif; }*/
+
+/* ------------------------------------------------------------- */
+/*             frontmatter, bodymatter, rearmatter               */
+/* ------------------------------------------------------------- */
+
+frontmatter, bodymatter, rearmatter, level1[class~=titlepage], level1[class~=toc] {
+  &:before {
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: $monospace;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 10px;
+    padding: 3px; }}
+
+frontmatter, bodymatter, rearmatter {
+  &:before {
+    background-color: #2299FF; }}
+
+level1[class~=titlepage], level1[class~=toc] {
+  &:before {
+    background-color: #00DDBF; }}
+
+frontmatter:before {
+  content: "frontmatter"; }
+
+bodymatter:before {
+  content: "bodymatter"; }
+
+rearmatter:before {
+  content: "rearmatter"; }
+
+level1[class~=titlepage]:before {
+  content: "titlepage"; }
+
+level1[class~=toc]:before {
+  content: "toc"; }
+
+doctitle {
+  margin: 20px;
+  padding: 20px;
+  border: $grey-border; }
+
+docauthor {
+  margin-bottom: 20px; }
+
+level1[class~=toc] > list {
+  display: table;
+  > li {
+    display: table-row;
+    > lic {
+      display: table-cell;
+      padding-right: 50px; }}}
+
+/* ------------------------------------------------------------- */
+/*                        levels & headings                      */
+/* ------------------------------------------------------------- */
+
+level, level1, level2, level3, level4, level5, level6 {
+  display: block;
+  border-left: $grey-border;
+  padding-left: 20px;
+}
+
+h2, level level hd {
+  color: #0077FF; }
+
+/* ------------------------------------------------------------- */
+/*                            pagenum                            */
+/* ------------------------------------------------------------- */
+
+pagenum {
+  text-align: right;
+  font-weight: bold;
+  font-family: $monospace;
+  border: $grey-border;
+  padding: 2px 8px;
+  border-top: none;
+  border-left: none; }
+
+prodnote {
+  background-color: $grey-background;
+  font-size: 90%;
+  font-style: italic;
+  border-style: dashed;
+  &:before {
+    content: "prodnote:";
+    text-transform: uppercase;
+    font-family: $monospace; }}
+
+/* ------------------------------------------------------------- */
+/*                            images                             */
+/* ------------------------------------------------------------- */
+
+imggroup {
+  display: block;
+  margin: 20px;
+  text-align: center;
+  > caption {
+    display: block;
+    font-weight: bold;
+    padding: 10px; }}
+
+img {
+  content: attr(src, url); }
+
+/* ------------------------------------------------------------- */
+/*                            lists                              */
+/* ------------------------------------------------------------- */
+
+list[type=ol] {
+  list-style-type: decimal; }
+
+/* ------------------------------------------------------------- */
+/*                            inline                             */
+/* ------------------------------------------------------------- */
+
+$inline-background: #FFAADD;
+
+abbr {
+  background-color: $inline-background; }
+
+/* ------------------------------------------------------------- */
+/*                          classes                              */
+/* ------------------------------------------------------------- */
+
+$preceding-background: #FFDD77;
+
+p[class~=precedingemptyline], p[class~=precedingseparator] {
+  $border-left: 10px;
+  $padding-left: 5px;
+  border-left: $border-left solid $preceding-background;
+  margin-top: 0;
+  margin-left: - $border-left - $padding-left;
+  padding-top: 0;
+  padding-left: $padding-left;
+  &:before {
+    display: block;
+    padding: 0;
+    margin: 0.7em 0 0 -0.7em;
+    background-color: $preceding-background;
+    text-align: center; }}
+
+p[class~=precedingemptyline]:before {
+  content: "precedingemptyline";
+  text-transform: uppercase;
+  font-family: $monospace;
+  font-size: smaller; }
+
+p[class~=precedingseparator]:before {
+  content: "☆ ☆ ☆";
+  font-family: "Arial Unicode MS", $monospace;}
+
+/* ------------------------------------------------------------- */
+/*                          braille                              */
+/* ------------------------------------------------------------- */
+
+$braille-background: #FFAADD;
+
+brl|* {
+  background-color: $braille-background; }
+
+/*brl|v-form:after {
+  content: "v-form";
+  text-transform: uppercase;
+  vertical-align: top;
+  font-family: $monospace;
+  font-size: 60%;
+  line-height: 1em;
+  padding: 0 4px; }*/
+
