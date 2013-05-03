@@ -7,7 +7,7 @@
   <baseDirectory>.</baseDirectory>
   <fileSets>
     <fileSet>
-      <directory>target/framework</directory>
+      <directory>${project.build.outputDirectory}</directory>
       <outputDirectory>/dtbook</outputDirectory>
     </fileSet>
   </fileSets>
