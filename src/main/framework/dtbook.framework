@@ -14,7 +14,7 @@
 								<Integer>6</Integer>
 							</field>
 							<field name="uri">
-								<String>${frameworks}/dtbook/schema/dtbook-2005-3-sbs.rng</String>
+								<String>${frameworks}/dtbook/schema/dtbook-2005-3-sbs-all.rng</String>
 							</field>
 						</docTypeSchema>
 					</field>
@@ -642,7 +642,9 @@
 						</authorExtension>
 					</field>
 					<field name="templatesLocations">
-						<String-array/>
+						<String-array>
+							<String>${frameworks}/dtbook/templates</String>
+						</String-array>
 					</field>
 					<field name="xmlCatalogs">
 						<String-array/>

@@ -42,15 +42,15 @@
             <resource>
                 <directory>src/main</directory>
                 <includes>
-                    <include>schema/*.rng</include>
                     <include>css/*.css</include>
                 </includes>
             </resource>
             <resource>
-                <directory>target/schema</directory>
+                <directory>target/dependency/rng</directory>
                 <includes>
                     <include>*.rng</include>
                 </includes>
+                <targetPath>schema</targetPath>
             </resource>
         </resources>
         <plugins>
@@ -72,7 +72,6 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.outputDirectory}/schema</outputDirectory>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>ch.sbs</groupId>
@@ -80,7 +79,6 @@
                                     <type>zip</type>
                                 </artifactItem>
                             </artifactItems>
-                            <includes>*.rng</includes>
                         </configuration>
                     </execution>
                 </executions>
